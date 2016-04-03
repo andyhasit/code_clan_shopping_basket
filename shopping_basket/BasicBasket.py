@@ -1,13 +1,12 @@
 """
 This is basic shopping backet which just allows adding and removing of items.
-
-Functionality for apply discounts don't belong in here. See BasketWithDiscounts.
-
+Functionality for apply discounts don't belong in here.
+See BasketWithDiscounts.
 """
 
 from ItemInBasket import ItemInBasket
 
-class BasicShoppingBasket(object):
+class BasicBasket(object):
     """
     A basic shopping backet which allows adding and removing of items.
     Each product is only listed once, if added again, quantity is updated.

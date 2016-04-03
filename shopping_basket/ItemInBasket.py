@@ -17,3 +17,7 @@ class ItemInBasket(object):
         
     def update_quantity(self, new_quantity):
         self._quantity = new_quantity
+        
+    @property
+    def total(self):
+        return self._quantity * self._product.price
