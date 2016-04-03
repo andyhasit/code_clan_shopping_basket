@@ -16,6 +16,7 @@ class PercentagePriceAdjuster(object):
         Returns new total if previous is above minimum.
         """
         if previous_total > self._min_value:
-            return previous_total + previous_total * self._percentage_discount/100
+            total = float(previous_total)
+            return total - total * self._percentage_discount/100
         return previous_total
 
