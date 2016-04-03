@@ -57,3 +57,16 @@ You can then run the tests with:
 $ cd code_clan_shopping_basket
 $ py.test
 ```
+
+## Decision
+
+Here's some decisions I made and why:
+
+ - I decided against using [venv](https://docs.python.org/3/library/venv.html), as you may not by a Pythony person and it would just cause extra grief when all you want to do is check my code.
+ - I used [argparse](https://docs.python.org/3/library/argparse.html) instead of better alternatives because I want to avoid dependencies that might stop you running the app.
+ - I used [pytest](http://pytest.org/latest/contents.html) because I find it better than Python's default unittest, although this is a depencency which you might stop you being able to run the tests, but not the app.
+ - I put the test files in the same directory as the source files. That makes things easier for a project this size (plus thanks to naming convention you can immediately see if any source file doesn't have a test counterpart!)
+
+## Documentation
+
+I put my comments and explanations in the source code instead of in here, to avoid you jumping back and forth.
