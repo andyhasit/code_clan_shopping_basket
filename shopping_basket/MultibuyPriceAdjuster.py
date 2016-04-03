@@ -37,6 +37,8 @@ class MultibuyPriceAdjuster(object):
     """
     Adjusts the price for a series of multi-buy offers.
     """
+    def __init__(self):
+        self._offers = []
         
     def add_offer(self, offer):
         """
@@ -48,17 +50,17 @@ class MultibuyPriceAdjuster(object):
         """
         Returns the price for all items after applying offers.
         """
-        items_in_offers_collector = ItemsInOffersCollector(self._offers)
-        value_for_not_in_offer = 0
+        collector = ItemsInOffersCollector(self._offers)
+        old_value_of_items_in_offers = 0
         for item in items:
-            if items_in_offers_collector.item_will_be_included_in_an_offer(item):
-                items_in_offers_collector.include_item_in_offer(item)
-            else:
-                value_for_not_in_offer += item.total
-        value_for_in_offer = items_in_offers_collector.get_total_for_all_items_in_offers()
-        return previous_total + value_for_not_in_offer + value_for_in_offer
-          
-       
+            if collector.item_will_be_included_in_an_offer(item):
+                collector.include_item_in_offer(item)
+                old_value_of_items_in_offers += item.total
+        new_value_of_items_in_offers = collector.get_new_value_for_all()
+        return (previous_total - old_value_of_items_in_offers) + \
+                new_value_of_items_in_offers
+    
+           
 class ItemsInOffersCollector(object):
     """
     Collects all items under offer for a single run of get_adjusted_price.
@@ -74,8 +76,8 @@ class ItemsInOffersCollector(object):
         """
         for offer in self._offers:
             if offer.is_item_included(item):
-                return true
-        return false
+                return True
+        return False
     
     def include_item_in_offer(self, item):
         """
@@ -86,7 +88,7 @@ class ItemsInOffersCollector(object):
         matching_offer = None
         for offer in self._offers:
             if offer.is_item_included(item):
-                if first_matching_offer is None:
+                if matching_offer is None:
                     matching_offer = offer
                 else:
                     raise MoreThanOneMatchingOfferException(matching_offer, 
@@ -94,7 +96,7 @@ class ItemsInOffersCollector(object):
         items_in_offer = self._items_in_offers.setdefault(matching_offer, [])
         items_in_offer.append(item)
         
-    def get_total_for_all_items_in_offers(self):
+    def get_new_value_for_all(self):
         total = 0
         for offer, items in self._items_in_offers.iteritems():
             total += offer.total_value_for_items(items)
@@ -131,10 +133,6 @@ class MultibuyOffer(object):
     def __eq__(self, other):
         return self._id == other._id
     
-    @property()
-    def id():
-        return self._id
-    
     def is_item_included(self, item):
         """
         item: ItemInBasket
@@ -152,22 +150,22 @@ class MultibuyOffer(object):
         discounted_groups = item_count // self._quantity
         remainder_count = item_count % self._quantity
         discounted_groups_value = discounted_groups * self._price_for_that_quantity
-        remainder_value = self.get_remainder_value(remainder_count, items_in_offer)
+        remainder_value = self._get_remainder_value(remainder_count, items_in_offer)
         return discounted_groups_value + remainder_value
         
-    def get_remainder_value(self, remainder_count, items_in_offer):
+    def _get_remainder_value(self, remainder_count, items_in_offer):
         """
         Returns the value for items not included in offer, e.g. third apple in
         bogof deal.
         Follows the supermarket rule of including the cheapest items in the 
         discount, and excluding the most expensive.
         """
-        individual_item_prices = [item.price items_in_offer]
-        for item_in_basket in items_in_offer:
+        unpacked_individual_item_prices = []
+        for item in items_in_offer:
             for i in range(item.quantity):
-                 individual_item_prices.append(item.unit_price)
-        individual_item_prices.sort()
-        return sum(individual_item_prices[:remainder_count])        
+                 unpacked_individual_item_prices.append(item.unit_price)
+        unpacked_individual_item_prices.sort(reverse=True)
+        return sum(unpacked_individual_item_prices[:remainder_count])        
     
 
 class MoreThanOneMatchingOfferException(BaseException):
