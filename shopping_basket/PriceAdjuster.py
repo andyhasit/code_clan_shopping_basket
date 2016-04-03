@@ -17,5 +17,3 @@ class BasePriceAdjuster(object):
         """
         new_total = previous_total
         return new_total
-
-

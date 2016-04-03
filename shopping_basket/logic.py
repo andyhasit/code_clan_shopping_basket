@@ -9,6 +9,7 @@ from Product import Product
 from BasicBasket import BasicBasket
 from ItemInBasket import ItemInBasket
 from BasketWithDiscounts import BasketWithDiscounts
+from PercentagePriceAdjuster import PercentagePriceAdjuster
 from MultibuyPriceAdjuster import MultibuyPriceAdjuster, MultibuyOffer, MoreThanOneMatchingOfferException
 
 __all__ = [
@@ -19,5 +20,6 @@ __all__ = [
         "BasketWithDiscounts",
         "MultibuyPriceAdjuster", 
         "MultibuyOffer", 
-        "MoreThanOneMatchingOfferException"
+        "MoreThanOneMatchingOfferException",
+        "PercentagePriceAdjuster"
         ]
