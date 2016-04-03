@@ -1,6 +1,8 @@
 """
 Just bundles all the files so they can be imported easily with:
+    
     from logic import *
+    
 """
 from Controller import Controller
 from Product import Product

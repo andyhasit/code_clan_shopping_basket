@@ -12,12 +12,19 @@ class ItemInBasket(object):
         return self._product.description
     
     @property
+    def unit_price(self):
+        return self._product.price
+    
+    @property
     def quantity(self):
         return self._quantity
-        
-    def update_quantity(self, new_quantity):
-        self._quantity = new_quantity
         
     @property
     def total(self):
         return self._quantity * self._product.price
+
+    def update_quantity(self, new_quantity):
+        self._quantity = new_quantity
+        
+        
+        
