@@ -1,3 +1,10 @@
+"""
+This is basic shopping backet which just allows adding and removing of items.
+
+Functionality for apply discounts don't belong in here. See BasketWithDiscounts.
+
+"""
+
 from ItemInBasket import ItemInBasket
 
 class BasicShoppingBasket(object):
@@ -46,3 +53,10 @@ class BasicShoppingBasket(object):
         """
         matcher = (x for x in self._items if x.description == product.description)
         return next(matcher, None)
+    
+    @property
+    def total(self):
+        running_total = 0
+        for item_in_basket in self._items:
+            running_total += item_in_basket.total
+        return running_total
