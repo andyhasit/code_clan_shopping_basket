@@ -7,11 +7,15 @@ from Product import Product
 from BasicBasket import BasicBasket
 from ItemInBasket import ItemInBasket
 from BasketWithDiscounts import BasketWithDiscounts
+from MultibuyPriceAdjuster import MultibuyPriceAdjuster, MultibuyOffer, MoreThanOneMatchingOfferException
 
 __all__ = [
         "Controller",
         "Product",
         "BasicBasket",
         "ItemInBasket",
-        "BasketWithDiscounts"
+        "BasketWithDiscounts",
+        "MultibuyPriceAdjuster", 
+        "MultibuyOffer", 
+        "MoreThanOneMatchingOfferException"
         ]
