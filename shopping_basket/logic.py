@@ -2,16 +2,24 @@
 
 class Product(object):
     """
-    A product in the shop.
+    A product in the shop. Descriptions must be unique.
     """
     def __init__(self, description, price):
-        self.description = description
-        self.price = description
+        self._description = description
+        self._price = price
     
+    @property
+    def description(self):
+        return self._description
+    
+    @property
+    def price(self):
+        return self._price
     
 class BasicShoppingBasket(object):
     """
     A basic shopping backet which allows adding and removing of items.
+    Each product is only listed once, if added again, quantity is updated.
     """
     
     def __init__(self):
@@ -32,19 +40,22 @@ class BasicShoppingBasket(object):
     def get_items(self):
         """
         Returns a list of the items.
-        Note this is a copy, so manilpulating the returned list has no effect on
+        Note this is a copy, so manipulating the returned list has no effect on
         the shopping basket.
         """
         return [i for i in self._items]
         
     def get_item_in_basket(self, product):
         """
-        
+        Returns the entry for the specified product, or None.
         """
+        matcher = (x for x in self._items if x.description == product.description)
+        return next(matcher, None)
+    
         
 class ItemInBasket(object):
     """
-    An item  in the shopping basket.
+    An item in a shopping basket.
     """
     def __init__(self, product, quantity):
         self._product = product
