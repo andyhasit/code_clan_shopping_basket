@@ -15,6 +15,15 @@ class BasicBasket(object):
     def __init__(self):
         self._items = []
     
+    @property
+    def items(self):
+        """
+        Returns a list of the items.
+        Note: this is a copy, so manipulating the returned list has no effect on
+        the shopping basket.
+        """
+        return self._items[:]
+    
     def add_item(self, product, quantity):
         """
         Adds an entry in the basket, or increments the quantity if the product
@@ -26,15 +35,7 @@ class BasicBasket(object):
             existing_entry_for_product.update_quantity(new_quantity)
         else:
             self._items.append(ItemInBasket(product, quantity))
-        
-    def get_items(self):
-        """
-        Returns a list of the items.
-        Note: this is a copy, so manipulating the returned list has no effect on
-        the shopping basket.
-        """
-        return self._items[:]
-    
+            
     def remove_item(self, item_in_basket):
         self._items.remove(item_in_basket)
         

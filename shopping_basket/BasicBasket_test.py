@@ -8,7 +8,7 @@ class TestBasicBasket:
         orange = Product('orange', 2.50)
         basket = BasicBasket()
         basket.add_item(apple, 4)
-        items = basket.get_items()
+        items = basket.items
         assert len(items) == 1
         item = items[0]
         assert item.description == 'apple'
@@ -20,7 +20,7 @@ class TestBasicBasket:
         basket = BasicBasket()
         basket.add_item(apple, 4)
         basket.add_item(orange, 6)
-        items = basket.get_items()
+        items = basket.items
         assert len(items) == 2
         item = items[0]
         assert item.description == 'apple'
@@ -36,7 +36,7 @@ class TestBasicBasket:
         basket.add_item(apple, 4)
         basket.add_item(orange, 6)
         basket.add_item(apple, 6)
-        items = basket.get_items()
+        items = basket.items
         assert len(items) == 2
         item = items[0]
         assert item.description == 'apple'
@@ -52,6 +52,6 @@ class TestBasicBasket:
         basket.add_item(apple, 4)   # price: 8
         basket.add_item(orange, 2)  # price: 5
         basket.add_item(apple, 2)   # price: 4
-        assert               basket.total == 17
+        assert basket.total == 8 + 5 + 4
         
         

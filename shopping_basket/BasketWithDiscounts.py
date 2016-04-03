@@ -1,13 +1,18 @@
 """
-This is a shopping basket that allos the applying of discounts
+This is a shopping basket that allows the applying of various price adjustments,
+which can be discounts, or adding things like tax.
+
+This is more flexible than one function which applies the three discounts 
+required from the spec.
+
  
-I implemented this as separate to BasicBasket and used object composition
+I implemented this as separate a class to BasicBasket using object composition
 instead of inheritance, i.e. it uses an "inner basket" instead of subclassing
 BasicShoppingBasket.
 
 Advantages:
     
-    It's asier to test. We can pass it a mock inner basket with just the basic 
+    It's easier to test. We can pass it a mock inner basket with just the basic 
     functionality needed to test the calculation of totals.
     
     In production we can pass an inner basket which persists changes to the 
@@ -31,18 +36,39 @@ class BasketWithDiscounts(object):
         inner_basket must be an implementation of BasicBasket.
         """
         self._basket = inner_basket
-        self._price_adjusters
+        self._price_adjusters = []
         
     def add_price_adjuster(self, price_adjuster):
         """
-        price_adjuster must be an implementation of PriceAdjuster.
+        price_adjuster must be an implementation of BasePriceAdjuster.
         Price adjusters will be applied when caculating the total in the order
         they were added here. Caller is responsible for ensuring correct order.
         """
-    
+        self._price_adjusters.append(price_adjuster)
+        
     @property
     def total(self):
-        initial_total = self._basket.total
+        """
+        Returns the total after applying all adjustments (in order they were added).
+        """
+        total = self._basket.total
+        items = self._basket.items
+        for price_adjuster in self._price_adjusters:
+            total = price_adjuster.get_adjusted_price(total, items)
+        return total
+        
+    @property
+    def items(self):
+        return self._basket.items
+    
+    def add_item(self, product, quantity):
+        self._basket.add_item(product, quantity)
+    
+    def remove_item(self, item_in_basket):
+        self._basket.remove(item_in_basket)
+        
+    def empty(self):
+        self._basket.emtpy()
         
         
         

@@ -1,7 +1,7 @@
 
 # Shopping Basket
 
-A code exercise for job application to Code Clan.
+A code exercise for my job application to Code Clan.
 
 ## Exercise
 
