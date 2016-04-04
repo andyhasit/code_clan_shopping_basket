@@ -29,13 +29,15 @@ class BasicBasket(object):
         Adds an entry in the basket, or increments the quantity if the product
         is already in the basket.
         """
-        existing_entry_for_product = self.get_item_in_basket(product)
-        if existing_entry_for_product:
-            new_quantity = existing_entry_for_product.quantity + quantity
-            existing_entry_for_product.update_quantity(new_quantity)
+        entry_for_product = self.get_item_in_basket(product)
+        if entry_for_product:
+            new_quantity = entry_for_product.quantity + quantity
+            entry_for_product.update_quantity(new_quantity)
         else:
-            self._items.append(ItemInBasket(product, quantity))
-            
+            entry_for_product = ItemInBasket(product, quantity)
+            self._items.append(entry_for_product)
+        return entry_for_product    
+    
     def remove_item(self, item_in_basket):
         self._items.remove(item_in_basket)
         

@@ -69,13 +69,13 @@ class BasketWithDiscounts(object):
         return self._basket.items
     
     def add_item(self, product, quantity):
-        self._basket.add_item(product, quantity)
+        return self._basket.add_item(product, quantity)
     
     def remove_item(self, item_in_basket):
-        self._basket.remove(item_in_basket)
+        self._basket.remove_item(item_in_basket)
         
     def empty(self):
-        self._basket.emtpy()
+        self._basket.empty()
         
         
         

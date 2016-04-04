@@ -3,37 +3,46 @@ from DemoHelper import DemoHelper
 
 class DemoRunner(object):
     """
-    Sets up the demo runner with discounts as per instructions.
-    
+    Sets up the demo runner with discounts.
     """
 
     def __init__(self):
         self._helper = DemoHelper()
         self.controller = Controller()
         self.basket = self.controller.new_basket()
-        self.setup_discounts()
+        self._offers = []
+        self._percentage_discounts = []
         
+    def add_offer(self, offer):
+         self._offers.append(offer)
+        
+    def add_percentage_discount(self, percentage_discount):
+         self._percentage_discounts.append(percentage_discount)
+    
     def setup_discounts(self):
-        # Create a bogof offer on apples
-        bogof_apple_offer = MultibuyOffer(['apple'], 2, 1.50)
+        """
+        Sets up the multibuy discount, then percentage discounts in the order
+        they were added.
+        """
+        self._setup_multibuy_discount()
+        self._setup_percentage_discounts()
         
-        # Create a generic multi-buy price adjuster
+    def _setup_multibuy_discount(self):
+        """
+        Adds a multi-buy price adjusters to the basket, with all the offers
+        (e.g. bogof on oranges)
+        """
         multi_buy_price_adjuster = MultibuyPriceAdjuster()
-        
-        # Add the  bogof offer on apples
-        multi_buy_price_adjuster.add_offer(bogof_apple_offer)
-        # We could add more offers here, like buy 3 for 2.50 etc..
-        
-        # Create 10% off for value over 20 adjuster
-        ten_percent_off_on_orders_over_twenty = PercentagePriceAdjuster(10, 20)
-        
-        # Create a user discount adjuster at 2%
-        user_loyalty_discount = PercentagePriceAdjuster(2, 0)
-        
-        # Add the price adjusters in the order we want them applied
+        for offer in self._offers:
+            multi_buy_price_adjuster.add_offer(offer)
         self.basket.add_price_adjuster(multi_buy_price_adjuster)
-        self.basket.add_price_adjuster(ten_percent_off_on_orders_over_twenty)
-        self.basket.add_price_adjuster(user_loyalty_discount)
+        
+    def _setup_percentage_discounts(self):
+        """
+        Adds the percentage price adjusters to the basket.
+        """
+        for percentage_discount in self._percentage_discounts:            
+            self.basket.add_price_adjuster(percentage_discount)
           
     def print_basket(self, msg):
         """
