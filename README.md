@@ -23,7 +23,9 @@ running correctly.
 
 ## Prerequisites
 
-The program is written in Python 2.7, it **may** run on other versions, but that's not been tested.
+The program is written in Python 2.7, it **may** run on other versions.
+
+I've tested this on Windows and Linux, but not Mac.
 
 ## Installing & Running
 
@@ -43,9 +45,9 @@ This will run a quick demo printing output to the command line, showing basic fu
 
 Here's an [online percentage calculator](http://www.percentagecalculator.co/Add-Subtract-Percentage.html) for quick checking.
 
-## Running the tests
+## Unit tests
 
-There are 17 unit tests, coverage is not complete, and there is no protection against edge cases or invalid input (not that there is a user interface).
+There are 18 unit tests, coverage is not complete, and there is no protection against edge cases or invalid input (not that there is a user interface).
 
 The tests are written with [pytest](http://pytest.org/latest/contents.html) which you will need to install if you want to run the tests:
 
@@ -78,6 +80,10 @@ Some of the decisions I made and why:
 
 I put comments and explanations in the source code instead of in here, to avoid you jumping back and forth.
 
-The best place to start is probably **\_\_main\_\_.py**, which runs the demo. The code in there hasn't been particularly well structured, and it just there for you to tweak to see things run.
+The best place to start is probably **\_\_main\_\_.py**, which runs the demo. The code in is just for you to tweak to see things run, it's not particularly well structured!
 
 Everything else should be reasonably well organised, with mostly one class per file, and a test file named after the source file it tests.
+
+## Questions
+
+Just email me at [andyhasit@gmail.com](andyhasit@gmail.com) 

@@ -1,12 +1,14 @@
 
 class DemoHelper(object):
-    
-    def __init__(self):
+    """
+    Helps print basket to the terminal.
+    """
+    def __init__(self, basket):
         self._table_columns = ('item', 'qty', 'unit', 'total')
         self._padding_values = (20, 8, 8, 8)
-        
+        self._basket = basket
     
-    def print_basket(self, basket, message):
+    def print_basket(self, message):
         self._print_line()
         self._print_line()
         print ""
@@ -14,11 +16,11 @@ class DemoHelper(object):
         print ""
         self._print_table_header()
         self._print_line()
-        for item in basket.items:
+        for item in self._basket.items:
             self._print_table_row(item)
         print ""
-        print 'Gross:  {0}'.format(self._format_currency(basket.gross_total))
-        print 'Net:    {0}'.format(self._format_currency(basket.net_total))
+        print 'Gross:  {0}'.format(self._format_currency(self._basket.gross_total))
+        print 'Net:    {0}'.format(self._format_currency(self._basket.net_total))
         print ""
         
     def _print_line(self):
