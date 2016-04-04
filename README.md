@@ -85,6 +85,3 @@ The best place to start is probably **\_\_main\_\_.py**, which runs the demo. Th
 
 Everything else should be reasonably well organised, with mostly one class per file, and a test file named after the source file it tests.
 
-## Questions
-
-Just email me at andyhasit<at>gmail.com 
