@@ -87,4 +87,4 @@ Everything else should be reasonably well organised, with mostly one class per f
 
 ## Questions
 
-Just email me at [andyhasit@gmail.com](andyhasit@gmail.com) 
+Just email me at andyhasit<at>gmail.com 
