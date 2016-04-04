@@ -71,16 +71,16 @@ $ py.test
 
 Some of the decisions I made and why:
 
- - I decided against using [venv](https://docs.python.org/3/library/venv.html), as you may not by a Pythony person and it would just cause extra grief when all you want to do is check my code.
- - I used [argparse](https://docs.python.org/3/library/argparse.html) instead of better alternatives because I want to avoid dependencies that might stop you running the app.
- - I used [pytest](http://pytest.org/latest/contents.html) because I find it lets me write cleaner test code than Python's default unittest, although this is a depencency which you might stop you being able to run the tests, but not the app.
- - I put the test files in the same directory as the source files. That makes things easier for a project this size (plus thanks to naming convention you can immediately see if any source file doesn't have a test counterpart)
+ - I decided against using [venv](https://docs.python.org/3/library/venv.html), as you may not by a Pythony person and it would just cause extra hassle when all you want to do is check my code.
+ - I used [pytest](http://pytest.org/latest/contents.html) because I find it lets me write cleaner test code than Python's default unittest. This is a depencency which might hinder you being able to run the tests, but not the app, so I thought it was a fair trade-off.
+ - I put the test files in the same directory as the source files. I think that's acceptable on a project this size (plus you can easily see which source files don't have a test counterpart)
+ - I didn't build any data persistence, or a GUI. I focused instead on creating a discount system that is flexible, testable, reusable and extendable (I felt like flexing my traditional OOP skills a bit as I've been spending too much time in JavaScript of late!)
 
 ## Documentation
 
 I put comments and explanations in the source code instead of in here, to avoid you jumping back and forth.
 
-The best place to start is probably **\_\_main\_\_.py**, which runs the demo. The code in is just for you to tweak to see things run, it's not particularly well structured!
+The best place to start is probably **\_\_main\_\_.py**, which runs the demo. The code in is just for you to tweak to see things run, it's not particularly well structured...
 
 Everything else should be reasonably well organised, with mostly one class per file, and a test file named after the source file it tests.
 
