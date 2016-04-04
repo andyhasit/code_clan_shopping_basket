@@ -75,6 +75,7 @@ Some of the decisions I made and why:
  - I used [pytest](http://pytest.org/latest/contents.html) because I find it lets me write cleaner test code than Python's default unittest. This is a depencency which might hinder you being able to run the tests, but not the app, so I thought it was a fair trade-off.
  - I put the test files in the same directory as the source files. I think that's acceptable on a project this size (plus you can easily see which source files don't have a test counterpart)
  - I didn't build any data persistence, or a GUI. I focused instead on creating a discount system that is flexible, testable, reusable and extendable (I felt like flexing my traditional OOP skills a bit as I've been spending too much time in JavaScript of late!)
+ - I'm assessing product uniqueness on description (e.g. "apples" vs "oranges") and not on unique id as you would in a real system, purely because it's easier to follow what's going on in the context of a demo.
 
 ## Documentation
 
