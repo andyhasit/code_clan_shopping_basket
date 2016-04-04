@@ -1,5 +1,5 @@
 """
-Price Adjusters are used for adjusting the price of a shipping basket.
+Price Adjusters are used for adjusting the price of a shopping basket.
 
 It is up to the caller to apply these in correct order to shopping baskets.
 """
@@ -15,5 +15,4 @@ class BasePriceAdjuster(object):
         items: list of ItemInBasket
         Returns a new total.
         """
-        new_total = previous_total
-        return new_total
+        return previous_total

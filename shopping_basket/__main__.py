@@ -1,8 +1,7 @@
 """
 A shopping basket demo application for CodeClan.
 
-App runs as a mini demo to show it works.
-To see what actually all works you're best checking the test files.
+This file just runs a mini demo to show it works.
 
 """
 from logic import *

@@ -39,6 +39,10 @@ class BasicBasket(object):
         return entry_for_product    
     
     def remove_item(self, item_in_basket):
+        """
+        Removes an item from the basket.
+        item_in_basket: reference ot the item.
+        """
         self._items.remove(item_in_basket)
         
     def empty(self):
