@@ -47,15 +47,22 @@ class BasketWithDiscounts(object):
         self._price_adjusters.append(price_adjuster)
         
     @property
-    def total(self):
+    def net_total(self):
         """
-        Returns the total after applying all adjustments (in order they were added).
+        The total after applying all adjustments (in order they were added).
         """
         total = self._basket.total
         items = self._basket.items
         for price_adjuster in self._price_adjusters:
             total = price_adjuster.get_adjusted_price(total, items)
         return total
+        
+    @property
+    def gross_total(self):
+        """
+        The total before applying any adjustments.
+        """
+        return self._basket.total
         
     @property
     def items(self):

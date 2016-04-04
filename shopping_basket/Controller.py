@@ -24,7 +24,9 @@ class Controller(object):
         if description in self._used_descriptions:
             raise ValueError(self._unique_desc_error_message.format(description))
         self._used_descriptions.append(description)
-        self._products.append(Product(description, price))
+        new_product = Product(description, price)
+        self._products.append(new_product)
+        return new_product
      
     def new_basket(self):
         """

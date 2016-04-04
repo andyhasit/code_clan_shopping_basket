@@ -23,7 +23,7 @@ class TestBasketWithDiscount:
         basket = BasketWithDiscounts(BasicBasket())
         basket.add_item(apple, 2)
         basket.add_item(lemon, 2)
-        assert basket.total == 4 + 6
+        assert basket.net_total == 4 + 6
       
     def test_with_one_adjuster(self):
         """
@@ -35,7 +35,7 @@ class TestBasketWithDiscount:
         basket.add_price_adjuster(PriceAdjusterAddFifty())
         basket.add_item(apple, 2)
         basket.add_item(lemon, 2)
-        assert basket.total == 15
+        assert basket.net_total == 15
           
     def test_with_two_adjusters(self):
         """
@@ -52,7 +52,7 @@ class TestBasketWithDiscount:
         basket.add_price_adjuster(PriceAdjusterAddFifty())
         basket.add_item(apple, 2)
         basket.add_item(lemon, 2)
-        assert basket.total == 15
+        assert basket.net_total == 15
         
     def test_with_two_adjusters_reversed(self):
         """
@@ -69,7 +69,7 @@ class TestBasketWithDiscount:
         basket.add_price_adjuster(PriceAdjusterFreeLemons())
         basket.add_item(apple, 2)
         basket.add_item(lemon, 2)
-        assert basket.total == 18
+        assert basket.net_total == 18
         
         
         
