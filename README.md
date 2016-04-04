@@ -14,7 +14,7 @@ Additionally, we must be able to calculate the total of the shopping basket
 accounting for:
 
  - Buy one get one free discounts on items         
- - 10% off on totals greater than £20 (after bogof)         
+ - 10% off on totals greater than Â£20 (after bogof)         
  - 2% off on total (after all other discounts) for customers with loyalty          
 cards
 
@@ -65,14 +65,14 @@ $ cd code_clan_shopping_basket
 $ py.test
 ```
 
-## Decision
+## Comments on some decisions
 
 Some of the decisions I made and why:
 
  - I decided against using [venv](https://docs.python.org/3/library/venv.html), as you may not by a Pythony person and it would just cause extra grief when all you want to do is check my code.
  - I used [argparse](https://docs.python.org/3/library/argparse.html) instead of better alternatives because I want to avoid dependencies that might stop you running the app.
- - I used [pytest](http://pytest.org/latest/contents.html) because I find it better than Python's default unittest, although this is a depencency which you might stop you being able to run the tests, but not the app.
- - I put the test files in the same directory as the source files. That makes things easier for a project this size (plus thanks to naming convention you can immediately see if any source file doesn't have a test counterpart!)
+ - I used [pytest](http://pytest.org/latest/contents.html) because I find it lets me write cleaner test code than Python's default unittest, although this is a depencency which you might stop you being able to run the tests, but not the app.
+ - I put the test files in the same directory as the source files. That makes things easier for a project this size (plus thanks to naming convention you can immediately see if any source file doesn't have a test counterpart)
 
 ## Documentation
 
@@ -80,4 +80,4 @@ I put comments and explanations in the source code instead of in here, to avoid 
 
 The best place to start is probably **\_\_main\_\_.py**, which runs the demo. The code in there hasn't been particularly well structured, and it just there for you to tweak to see things run.
 
-Everything else should be reasonably well organised, with on class per file except for very closely related classes.
+Everything else should be reasonably well organised, with mostly one class per file, and a test file named after the source file it tests.
